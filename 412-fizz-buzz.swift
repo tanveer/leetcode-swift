@@ -7,28 +7,29 @@
 
 import Foundation
 
-
-//MARK: - FizzBuzz problem #412
-
 // 412. Fizz Buzz
 // https://leetcode.com/problems/fizz-buzz
+
 // MARK: - Solution
 // ================
 class Solution {
     func fizzBuzz(_ n: Int) -> [String] {
-      var result = [String]()
+        guard n > 0 else { return [] }
+        
+        var strings = [String]()
+        
         for i in 1...n {
-          if i % 3 == 0 && i % 5 == 0 {
-             result.append("FizzBuzz")
-          } else if i % 5 == 0 {
-              result.append("Buzz")
-          } else if i % 3 == 0 {
-              result.append("Fizz")
-          } else {
-            result.append("\(i)")
-          }
+            if i % 3 == 0 && i % 5 == 0 {
+                strings.append("FizzBuzz")
+            } else if i % 5 == 0 {
+                strings.append("Buzz")
+            } else if i % 3 == 0 {
+                strings.append("Fizz")
+            } else {
+                strings.append("\(i)")
+            }
         }
-      return result
+        return strings
     }
 }
 
@@ -42,12 +43,13 @@ class Solution {
 // Space Complexity: O(n)
 // Explanation: Output array size is same as the size of input value
 
+
 // MARK: - Tests
 // =============
 import XCTest
 class Tests: XCTestCase {
     let s = Solution()
-
+    
     // LeetCode Examples
     func testLeetCodeExamples() {
         let expected = [
@@ -69,7 +71,7 @@ class Tests: XCTestCase {
         ]
         XCTAssertEqual(s.fizzBuzz(15), expected)
     }
-
+    
     // Additional Examples
     func testAdditionalExamples() {
         XCTAssertEqual(s.fizzBuzz(0), [])
