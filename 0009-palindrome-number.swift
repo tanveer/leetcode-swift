@@ -15,13 +15,13 @@ class Solution {
         guard x >= 0 else { return false }
         var original = x
         var reversed = 0
-
+        
         while original > 0 {
             let onesDigit = original % 10
             reversed = (reversed * 10) + onesDigit
             original /= 10
         }
-
+        
         return x == reversed
     }
 }
@@ -29,11 +29,11 @@ class Solution {
 // MARK: - Time and Space Complexity
 // =================================
 //
-// Time Complexity: O(__REPLACE_ME__)
-// Explanation: __REPLACE_ME__
+// Time Complexity: O(n)
+// Explanation: Checking the size on the input value
 //
-// Space Complexity: O(__REPLACE_ME__)
-// Explanation: __REPLACE_ME__
+// Space Complexity: O(1)
+// Explanation: Only var is used to stoe the answer
 
 // MARK: - Tests
 // =============
