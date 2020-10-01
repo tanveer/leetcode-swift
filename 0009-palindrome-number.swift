@@ -12,20 +12,19 @@
 // ================
 class Solution {
     func isPalindrome(_ x: Int) -> Bool {
-        var x = x
-        if x < 0 || x % 10 == 0 && x != 0 { return false }
-
+        guard x >= 0 else { return false }
+        var original = x
         var reversed = 0
 
-        while x > reversed {
-            reversed = reversed * 10 + x % 10
-            if reversed == x {return true}
-            x = Int(x / 10)
+        while original > 0 {
+            let onesDigit = original % 10
+            reversed = (reversed * 10) + onesDigit
+            original /= 10
         }
-        return reversed == x
+
+        return x == reversed
     }
 }
-
 
 // MARK: - Time and Space Complexity
 // =================================
@@ -56,4 +55,3 @@ class Tests: XCTestCase {
 }
 
 Tests.defaultTestSuite.run()
-
