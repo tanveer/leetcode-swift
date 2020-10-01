@@ -14,9 +14,9 @@ class Solution {
     func isPalindrome(_ x: Int) -> Bool {
         var x = x
         if x < 0 || x % 10 == 0 && x != 0 { return false }
-        
+
         var reversed = 0
-        
+
         while x > reversed {
             reversed = reversed * 10 + x % 10
             if reversed == x {return true}
