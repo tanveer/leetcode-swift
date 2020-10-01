@@ -36,11 +36,11 @@ class Solution {
 // MARK: - Time and Space Complexity
 // =================================
 //
-// Time Complexity: O(__REPLACE_ME__)
-// Explanation: __REPLACE_ME__
+// Time Complexity: O(n)
+// Explanation: checking each character in given string
 //
-// Space Complexity: O(__REPLACE_ME__)
-// Explanation: __REPLACE_ME__
+// Space Complexity: O(2)
+// Explanation: Converting string to array, creating dictionary to store the key-value_
 
 // MARK: - Tests
 // =============
