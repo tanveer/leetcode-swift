@@ -1,3 +1,5 @@
+#!/usr/bin/env swift -F /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks
+
 //
 //  0027-remove-element.swift
 //  
@@ -10,32 +12,33 @@
 
 // MARK: - Solution
 // ================
-func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
-    guard !nums.isEmpty else { return 0 }
-    var index = 0
-    
-    for (j, _ ) in nums.enumerated() {
-        if nums[j] != val {
-            nums[index] = nums[j]
-            index += 1
+class Solution {
+    func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
+        var index = 0
+        for n in nums {
+            if n != val {
+                nums[index] = n
+                index += 1
+            }
         }
+        return index
     }
-    return index
 }
 
 // MARK: - Time and Space Complexity
 // =================================
 //
-// Time Complexity: O(__REPLACE_ME__)
-// Explanation: __REPLACE_ME__
+// Time Complexity: O(n)
+// Explanation: checking every element in given array is needed.
 //
-// Space Complexity: O(__REPLACE_ME__)
-// Explanation: __REPLACE_ME__
+// Space Complexity: O(1)
+// Explanation: No additional space
 
 // MARK: - Tests
 // =============
 import XCTest
 class Tests: XCTestCase {
+    let s = Solution()
     let examples: [(original: [Int], val: Int, expected: [Int], count: Int)] = [
         // LeetCode Examples
         (
@@ -70,18 +73,18 @@ class Tests: XCTestCase {
             count: 2
         ),
     ]
-
+    
     func testExamples() {
         for example in examples {
-            let (actualCount, actualOutput) = inoutTestHelper(example.original, example.val)
+            let (actualCount, actualOutput) = removeElementTestHelper(example.original, example.val)
             XCTAssertEqual(actualCount, example.count, "Failed Example: \(example)")
             XCTAssertEqual(actualOutput, example.expected, "Failed Example: \(example)")
         }
     }
-
-    func inoutTestHelper(_ array: [Int], _ val: Int) -> (Int, [Int]){
+    
+    func removeElementTestHelper(_ array: [Int], _ val: Int) -> (Int, [Int]){
         var inoutArray = array
-        let newLength = s.testRemoveElement(&inoutArray, val)
+        let newLength = s.removeElement(&inoutArray, val)
         return (newLength, inoutArray)
     }
 }
