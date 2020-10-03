@@ -14,13 +14,10 @@ class Solution {
     func containsDuplicate(_ nums: [Int]) -> Bool {
         guard nums.count > 0 else { return false }
         var values = Set<Int>()
-        
+
         for num in nums {
-            if values.contains(num) {
-                return true
-            } else {
-                values.insert(num)
-            }
+            if values.contains(num) { return true }
+            values.insert(num)
         }
         return false
     }
@@ -30,22 +27,22 @@ class Solution {
 // =================================
 //
 // Time Complexity: O(n)
-// Explanation: It depends on the size of input
+// Explanation: We need to search each element and insert each element for n times
 //
-// Space Complexity: O(1)
-// Explanation: It's a constant look up
+// Space Complexity: O(n)
+// Explanation: we need Set is linear with number of elements in it
 
 // MARK: - Tests
 // =============
 import XCTest
 class Tests: XCTestCase {
     let s = Solution()
-    
+
     // LeetCode Examples
     func testLeetCodeExamples() {
-        XCTAssertTrue(s.containsDuplicate([1,2.3.1]))
+        XCTAssertTrue(s.containsDuplicate([1,2,3,1]))
     }
-    
+
     // Additional Examples
     func testAdditionalExamples() {
         XCTAssertTrue(s.containsDuplicate([1,1,1,3,3,4,3,2,4,2]))
