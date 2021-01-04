@@ -16,8 +16,8 @@ class Solution {
             let leftNum = nums[left]
             let rightNum = nums[right]
             
-            if rightNum % 2 <    leftNum % 2 {
-                nums.swapAt(left, right)
+            if leftNum % 2 > rightNum % 2 {
+                nums.swapAt(right, left)
             }
             
             if leftNum % 2 == 0 {
