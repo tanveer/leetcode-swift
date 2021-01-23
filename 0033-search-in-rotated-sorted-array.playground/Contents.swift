@@ -8,25 +8,48 @@ import Foundation
 class Solution {
     func search(_ nums: [Int], _ target: Int) -> Int {
         guard !nums.isEmpty else { return -1 }
-        var map = [Int: Int]()
+        let pivot = findPivot(nums, 0, nums.count - 1)
+        var left = 0
+        var right = nums.count - 1
 
-        for (i, num) in nums.enumerated() {
-            if map[i] == nil {
-                map[i] = num
-            }
+        if target >= nums[pivot] && target <= nums[right] {
+            left = pivot
+        } else {
+            right = pivot
+        }
 
-            if map[i]! == target {
-                return i
+        while  left <= right {
+            let mid = left + (right - left) / 2
+            if nums[mid] == target {
+                return mid
+            } else if nums[mid] < target {
+                left = mid + 1
+            } else {
+                right = mid - 1
             }
         }
 
         return -1
     }
+
+    func findPivot(_ nums: [Int], _ l: Int, _ r: Int) -> Int {
+        var left = l
+        var right = r
+        while left < right {
+            let mid = left + (right - left) / 2
+            if nums[mid] > nums[right] {
+                left = mid + 1
+            } else {
+                right = mid
+            }
+        }
+        return left
+    }
 }
 
 // MARK: - Time and Space Complexity
 // =================================
-// Time Complexity: O(n)
+// Time Complexity: O(log(n))
 // Space Complexity: O(1)
 
 // MARK: - Tests
