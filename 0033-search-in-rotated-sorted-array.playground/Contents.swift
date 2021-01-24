@@ -8,6 +8,7 @@ import Foundation
 class Solution {
     func search(_ nums: [Int], _ target: Int) -> Int {
         guard !nums.isEmpty else { return -1 }
+
         let pivot = findPivot(nums, 0, nums.count - 1)
         var left = 0
         var right = nums.count - 1
@@ -49,7 +50,7 @@ class Solution {
 
 // MARK: - Time and Space Complexity
 // =================================
-// Time Complexity: O(log(n))
+// Time Complexity: O(n)
 // Space Complexity: O(1)
 
 // MARK: - Tests
