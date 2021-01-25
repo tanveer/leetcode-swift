@@ -7,42 +7,53 @@ import Foundation
 // ================
 class Solution {
     func isToeplitzMatrix(_ matrix: [[Int]]) -> Bool {
-        for i in 0..<matrix.count - 1 {
-            for j in 0..<matrix[i].count - 1 {
-                if matrix[i][j] != matrix[i+1][j+1] {
+        var map = [Int: Int]()
+        for (i, row) in matrix.enumerated() {
+            for j in row.indices {
+                if map[i - j] == nil {
+                    map[i - j] = matrix[i][j]
+                } else if map[i - j]! != matrix[i][j] {
                     return false
                 }
             }
         }
-        
         return true
     }
 }
 
-
 // MARK: - Time and Space Complexity
 // =================================
-// Time Complexity: O(M,N)
-// Space Complexity: O(1)
-
+// Time Complexity: O(n+m)
+// Space Complexity: O(n+m)
 
 // MARK: - Tests
 // =============
 import XCTest
 class Tests: XCTestCase {
     let s = Solution()
-    
+
     // LeetCode Examples
     func testLeetCodeExample1() {
-        XCTAssertEqual(s.isToeplitzMatrix([[1, 2, 3, 4],
-                                           [5, 1, 2, 3],
-                                           [9, 5, 1, 2]]), true)
+        let matrix = [
+            [1, 2, 3, 4],
+            [5, 1, 2, 3],
+            [9, 5, 1, 2],
+        ]
+        XCTAssertTrue(s.isToeplitzMatrix(matrix))
     }
-    
+
     func testLeetCodeExample2() {
-        XCTAssertEqual(s.isToeplitzMatrix([[1, 2],[2, 2]]), false)
+        let matrix = [
+            [1, 2],
+            [2, 2],
+        ]
+        XCTAssertFalse(s.isToeplitzMatrix(matrix))
+    }
+
+    // Additional Examples
+    func testAdditionalExamples() {
+        XCTAssertTrue(s.isToeplitzMatrix([]))
     }
 }
 
 Tests.defaultTestSuite.run()
-
