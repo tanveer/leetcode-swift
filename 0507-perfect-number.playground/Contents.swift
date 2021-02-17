@@ -7,20 +7,21 @@ import Foundation
 // ================
 class Solution {
     func checkPerfectNumber(_ num: Int) -> Bool {
-        guard num > 1 else { return false }
-
+        guard num > 4 else { return false }
+        let root = Int(sqrt(Double(num)))
         var sum = 1
-        var i = 2
 
-        while i <= num / i {
-            if num % i == 0 {
-                sum += i + (num / i)
+        for n in 2...root where num % n == 0 {
+            sum += n
+            if n != num / n {
+                sum += num / n
             }
-
-            i += 1
         }
-
         return sum == num
+    }
+
+    func checkPerfectNumberOneLiner(_ num: Int) -> Bool {
+        return [6, 28, 496, 8128, 33550336].contains(num)
     }
 }
 
@@ -38,27 +39,27 @@ class Tests: XCTestCase {
     // LeetCode Examples
     func testLeetCodeExample1() {
         XCTAssertTrue(s.checkPerfectNumber(28))
+        XCTAssertTrue(s.checkPerfectNumberOneLiner(28))
     }
 
     func testLeetCodeExample2() {
         XCTAssertTrue(s.checkPerfectNumber(6))
+        XCTAssertTrue(s.checkPerfectNumberOneLiner(28))
     }
 
     func testLeetCodeExample3() {
         XCTAssertTrue(s.checkPerfectNumber(496))
+        XCTAssertTrue(s.checkPerfectNumberOneLiner(28))
     }
 
     func testLeetCodeExample4() {
         XCTAssertTrue(s.checkPerfectNumber(8128))
+        XCTAssertTrue(s.checkPerfectNumberOneLiner(28))
     }
 
     func testLeetCodeExample5() {
         XCTAssertFalse(s.checkPerfectNumber(2))
-    }
-
-    // Additional Examples
-    func testAdditionalExamples() {
-        XCTAssertTrue(s.checkPerfectNumber(0))
+        XCTAssertTrue(s.checkPerfectNumberOneLiner(28))
     }
 }
 
