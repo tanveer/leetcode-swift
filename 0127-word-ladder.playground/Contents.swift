@@ -7,11 +7,8 @@ import Foundation
 // ================
 class Solution {
     func ladderLength(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> Int {
-        var words = Set<String>()
-        for word in wordList {
-            words.insert(word)
-        }
-
+        var words = Set<String>(wordList)
+     
         if !words.contains(endWord) {
             return 0
         }
