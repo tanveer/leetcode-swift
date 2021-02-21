@@ -14,12 +14,12 @@ class Solution {
         for word in S.split(separator: " ") {
             var chars = Array(word)
             suffix += "a"
-            if !vowels.contains(Character(chars[0].lowercased())) {
+            let lowercasedChar = Character(chars[0].lowercased())
+            if !vowels.contains(lowercasedChar) {
                 let char = chars[0]
-                chars = Array(chars[1..<chars.count])
+                chars = Array(chars.dropFirst())
                 chars.append(char)
             }
-
             result += chars.map { String($0) }.joined() + "ma" + suffix + " "
         }
 
