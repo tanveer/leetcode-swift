@@ -7,18 +7,18 @@ import Foundation
 // ================
 class Solution {
     func isMonotonic(_ A: [Int]) -> Bool {
-        var increasing = true
-        var decreasing = true
+        var increasing = false
+        var decreasing = false
 
-        for i in 0..<A.count - 1 {
+        for i in A.indices.dropLast() {
             if A[i] > A[i + 1] {
-                increasing = false
+                increasing = true
+            } else if A[i] < A[i + 1] {
+                decreasing = true
             }
-            if A[i] < A[i + 1] {
-                decreasing = false
-            }
+            guard !(increasing&&decreasing) else { return false }
         }
-        return increasing || decreasing
+        return true
     }
 }
 
