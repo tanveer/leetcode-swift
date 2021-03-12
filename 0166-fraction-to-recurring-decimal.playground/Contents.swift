@@ -7,22 +7,21 @@ import Foundation
 // ================
 class Solution {
     func fractionToDecimal(_ numerator: Int, _ denominator: Int) -> String {
-        guard numerator > 0 else { return "0" }
+        guard numerator != 0 else { return "0" }
 
-        var result: [String] = []
-        let negitive = (numerator < 0 && denominator > 0) || numerator > 0 && denominator < 0
+        var result = [String]()
 
-        if  negitive {
+        if (numerator < 0 && denominator > 0) || numerator > 0 && denominator < 0 {
             result.append("-")
         }
 
         let dividend = abs(numerator)
         let divisor = abs(denominator)
-
         result.append("\(dividend / divisor)")
         var remainder = dividend % divisor
+
         if remainder == 0 {
-            return result.reduce("") { $0 + $1 }
+            return result.joined()
         }
 
         result.append(".")
@@ -40,7 +39,7 @@ class Solution {
             remainder %= divisor
         }
 
-        return result.reduce("") { $0 + $1 }
+        return result.joined()
     }
 }
 
@@ -74,6 +73,10 @@ class Tests: XCTestCase {
 
     func testLeetCodeExample5() {
         XCTAssertEqual(s.fractionToDecimal(1, 5), "0.2")
+    }
+
+    func testLeetCodeExample6() {
+        XCTAssertEqual(s.fractionToDecimal(-50, 8), "-6.25")
     }
 
     // Additional Examples
