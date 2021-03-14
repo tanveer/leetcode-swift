@@ -8,6 +8,7 @@ import Foundation
 class Solution {
     func sortArrayByParityII(_ nums: [Int]) -> [Int] {
         var result = [Int](repeating: 0, count: nums.count)
+
         var n = 0
         for num in nums where num % 2 == 0 {
             result[n] = num
@@ -19,15 +20,16 @@ class Solution {
             result[n] = num
             n += 2
         }
-
         return result
     }
 }
+
 
 // MARK: - Time and Space Complexity
 // =================================
 // Time Complexity: O(n)
 // Space Complexity: O(n)
+
 
 // MARK: - Tests
 // =============
