@@ -11,12 +11,13 @@ class Solution {
         var shiftedGrid = grid
         let row = grid.count
         let col = grid[0].count
+
         for r in 0..<row {
             for c in 0..<col {
                 let index = (((r * col) + c) + k) % (row * col)
-                let kRow = index / col
-                let kCol = index % col
-                shiftedGrid[kRow][kCol] = grid[r][c]
+                let newRow = index / col
+                let newCol = index % col
+                shiftedGrid[newRow][newCol] = grid[r][c]
             }
         }
         return shiftedGrid
@@ -26,7 +27,7 @@ class Solution {
 
 // MARK: - Time and Space Complexity
 // =================================
-// Time Complexity: O(m + n)
+// Time Complexity: O(n^2)
 // Space Complexity: O(n)
 
 
@@ -47,6 +48,16 @@ class Tests: XCTestCase {
 
     func testLeetCodeExample3() {
         XCTAssertEqual(s.shiftGrid([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 9), [[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    }
+
+    // LeetCode Tests
+    func testLeetCodeTest1() {
+        XCTAssertEqual(s.shiftGrid([[1]], 100), [[1]])
+    }
+
+    // Additional Examples
+    func testAdditionalExamples() {
+        XCTAssertEqual(s.shiftGrid([], 0), [])
     }
 }
 
