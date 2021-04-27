@@ -10,8 +10,8 @@ class Solution {
         guard !startTime.isEmpty else { return 0 }
 
         var numberOfBusyStudents = 0
-        for (index, element) in startTime.enumerated() {
-            numberOfBusyStudents += (element...endTime[index]).contains(queryTime) ? 1 : 0
+        for (start, end) in zip(startTime, endTime){
+            numberOfBusyStudents += (start...end).contains(queryTime) ? 1 : 0
         }
 
         return numberOfBusyStudents
