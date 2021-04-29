@@ -8,13 +8,12 @@ import Foundation
 class Solution {
     func maxProduct(_ nums: [Int]) -> Int {
         guard !nums.isEmpty else { return 0 }
-        var num1 = 0
-        var num2 = 0
+        var num1 = Int.min
+        var num2 = Int.min
 
         for num in nums {
             if num >= num1 {
-                num2 = num1
-                num1 = num
+                (num2 , num1) = (num1, num)
             } else if num > num2 {
                 num2 = num
             }
