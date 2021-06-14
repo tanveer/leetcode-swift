@@ -8,28 +8,22 @@ import Foundation
 class Solution {
     func longestCommonPrefix(_ strs: [String]) -> String {
         guard !strs.isEmpty else { return "" }
-        guard strs.count != 1 else { return strs[0] }
-        
-        let strs = strs.sorted(by: <)
-        
-        var output = ""
-        for (char1, char2) in zip(strs.first!, strs.last!) {
-            if char1 == char2 {
-                output.append(char1)
-            } else {
-                break
+        var prefix = strs.first ?? ""
+
+        for word in strs {
+            while !word.hasPrefix(prefix) {
+                prefix.removeLast()
             }
         }
-        
-        return output
+        return prefix
     }
 }
 
 
 // MARK: - Time and Space Complexity
 // =================================
-// Time Complexity: O(__REPLACE_ME__)
-// Space Complexity: O(__REPLACE_ME__)
+// Time Complexity: O(n)
+// Space Complexity: O(1)
 
 
 // MARK: - Tests
@@ -37,16 +31,21 @@ class Solution {
 import XCTest
 class Tests: XCTestCase {
     let s = Solution()
-    
+
     // LeetCode Examples
     func testLeetCodeExample1() {
         XCTAssertEqual(s.longestCommonPrefix(["flower", "flow", "flight"]), "fl")
     }
-    
+
     func testLeetCodeExample2() {
         XCTAssertEqual(s.longestCommonPrefix(["dog", "racecar", "car"]), "")
     }
-    
+
+    // LeetCode Tests
+    func testLeetCodeTest1() {
+        XCTAssertEqual(s.longestCommonPrefix(["a"]), "a")
+    }
+
     // Additional Examples
     func testAdditionalExamples() {
         XCTAssertEqual(s.longestCommonPrefix([]), "")
