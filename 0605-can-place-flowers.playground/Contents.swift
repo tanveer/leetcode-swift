@@ -7,28 +7,28 @@ import Foundation
 // ================
 class Solution {
     func canPlaceFlowers(_ flowerbed: [Int], _ n: Int) -> Bool {
-        var adjcent = 0
-        var count = 1
+        guard !flowerbed.isEmpty else { return false }
+        var flowerbed = flowerbed
+        var space = 0
 
         for i in 0..<flowerbed.count {
-            if flowerbed[i] == 0 {
-                count += 1
-            } else {
-                adjcent += ( count - 1 ) / 2
-                count = 0
+            let isLeftSideEmpty = i == 0 || flowerbed[i - 1] == 0
+            let isRightSideEmpty = i == flowerbed.count - 1 || flowerbed[i + 1] == 0
+            if flowerbed[i] == 0, isLeftSideEmpty, isRightSideEmpty {
+                space += 1
+                flowerbed[i] = 1
             }
         }
-
-        adjcent += count / 2
-
-        return adjcent >= n
+        return space >= n
     }
 }
+
 
 // MARK: - Time and Space Complexity
 // =================================
 // Time Complexity: O(n)
-// Space Complexity: O(1)"
+// Space Complexity: O(1)
+
 
 // MARK: - Tests
 // =============
