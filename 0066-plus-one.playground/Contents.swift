@@ -7,19 +7,24 @@ import Foundation
 // ================
 class Solution {
     func plusOne(_ digits: [Int]) -> [Int] {
-        var result = digits
-        for i in stride(from: digits.count - 1, to: -1, by: -1) {
-            if digits[i] == 9 {
-                result[i] = 0
+        guard !digits.isEmpty else { return [] }
+        var original = digits
+
+        for i in original.indices.reversed() {
+            if original[i] != 9 {
+                original[i] += 1
+                return original
             } else {
-                result[i] += 1
-                return result
+                original[i] = 0
             }
         }
-        if result.first == 0 {
-            result.insert(1, at: 0)
-        }
-        return result
+
+        // incase of all 9's create a new array of size result.count + 1
+        var output = [Int](repeating: 0, count: original.count + 1)
+
+        // set first index to 1 and return the new array
+        output[0] = 1
+        return output
     }
 }
 
@@ -27,7 +32,7 @@ class Solution {
 // MARK: - Time and Space Complexity
 // =================================
 // Time Complexity: O(n)
-// Space Complexity: O(n)
+// Space Complexity: O(1)
 
 
 // MARK: - Tests
