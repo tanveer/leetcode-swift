@@ -7,17 +7,26 @@ import Foundation
 // ================
 class Solution {
     func peakIndexInMountainArray(_ arr: [Int]) -> Int {
-        for i in arr.indices.dropLast() where arr[i] > arr[i + 1] {
-            return i
+        var left = 0
+        var right = arr.count - 1
+
+        while left < right {
+            let mid = (left + right) / 2
+
+            if arr[mid] < arr[mid + 1] {
+                left = mid + 1
+            } else {
+                right = mid
+            }
         }
-        return -1
+        return left
     }
 }
 
 
 // MARK: - Time and Space Complexity
 // =================================
-// Time Complexity: O(n)
+// Time Complexity: O(log n)
 // Space Complexity: O(1)
 
 
