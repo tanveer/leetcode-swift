@@ -7,14 +7,14 @@ import Foundation
 // ================
 class Solution {
     func getSum(_ a: Int, _ b: Int) -> Int {
-        var a = a, b = b
+        var a = a
+        var b = b
 
         while b != 0 {
             let carry = a & b
             a = a ^ b
             b = carry << 1
         }
-
         return a
     }
 }
@@ -38,12 +38,18 @@ class Tests: XCTestCase {
     }
 
     func testLeetCodeExample2() {
-        XCTAssertEqual(s.getSum(-2, 3), 1)
+        XCTAssertEqual(s.getSum(2, 3), 5)
+    }
+
+    // LeetCode Tests
+    func testLeetCodeTest1() {
+        XCTAssertEqual(s.getSum(-1, 1), 0)
     }
 
     // Additional Examples
     func testAdditionalExamples() {
         XCTAssertEqual(s.getSum(0, 0), 0)
+        XCTAssertEqual(s.getSum(-2, 3), 1)
     }
 }
 
