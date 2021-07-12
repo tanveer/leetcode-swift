@@ -3,71 +3,64 @@ import Foundation
 // 155. Min Stack
 // https://leetcode.com/problems/min-stack
 
-// MARK: - Stack
-// =============
-
-struct Stack<Element> {
-    private var stack = [Element]()
-
-    mutating func push(_ x: Element) {
-        stack.append(x)
-    }
-
-    func isEmpty() -> Bool {
-        return stack.isEmpty
-    }
-
-    func peek() -> Element {
-        return stack[stack.count - 1]
-    }
-
-    mutating func pop() -> Element {
-        return stack.remove(at: stack.count - 1)
-    }
-}
-
 // MARK: - Solution
 // ================
 class MinStack {
-    /** initialize your data structure here. */
-    private var stack = Stack<Int>()
-    private var minStack = Stack<Int>()
+    private var stack = Stack<(val: Int, min: Int)>()
 
-    func push(_ x: Int) {
-        stack.push(x)
-        if minStack.isEmpty() {
-            minStack.push(x)
-        } else if x <= minStack.peek() {
-            minStack.push(x)
+    func push(_ val: Int) {
+        if stack.isEmpty {
+            stack.push((val, val))
+            return
         }
+        stack.push((val, min(val, stack.top.min)))
     }
 
     func pop() {
-        let pop = stack.pop()
-        if pop == minStack.peek() {
-            minStack.pop()
-        }
+        stack.pop()
     }
 
     func top() -> Int {
-        return stack.peek()
+        return stack.top.val
     }
 
     func getMin() -> Int {
-        return minStack.peek()
+        return stack.top.min
     }
 }
 
-/**
- * Your MinStack object will be instantiated and called as such:
- *
- * let obj = MinStack()
- * obj.push(x)
- * obj.pop()
- * let ret_3: Int = obj.top()
- * let ret_4: Int = obj.getMin()
- */
+struct Stack<Element> {
+    private var storage: [Element] = []
 
+    // return count of stack
+    var count: Int {
+        return storage.count
+    }
+
+    var top: Element {
+        return peek()
+    }
+
+    // check if stack is empty or not
+    var isEmpty: Bool {
+        return storage.isEmpty
+    }
+
+    // push an element at the top of the stack
+    mutating func push(_ value: Element) {
+        storage.append(value)
+    }
+
+    // show top most element in the stack
+    func peek() -> Element {
+        return storage[count - 1]
+    }
+
+    // remove top most element in the stack
+    mutating func pop() -> Element {
+        return storage.removeLast()
+    }
+}
 
 // MARK: - Time and Space Complexity
 // =================================
@@ -79,20 +72,27 @@ class MinStack {
 // =============
 import XCTest
 class Tests: XCTestCase {
-
     // LeetCode Examples
     func testLeetCodeExampleCall() {
-        // Your MinStack object will be instantiated and called as such:
-        // let obj = MinStack()
-        // obj.push(x)
-        // obj.pop()
-        // let ret_3: Int = obj.top()
-        // let ret_4: Int = obj.getMin()
+        let minStack = MinStack()
+        minStack.push(-2)
+        minStack.push(0)
+        minStack.push(-3)
+        XCTAssertEqual(minStack.getMin(), -3) // return -3
+        minStack.pop()
+        XCTAssertEqual(minStack.top(), 0)     // return 0
+        XCTAssertEqual(minStack.getMin(), -2) // return -2
     }
 
-    // Additional Examples
     func testAdditionalExamples() {
-        // {{ADDITIONAL_EXAMPLES}}
+        let minStack = MinStack()
+        minStack.push(-2)
+        minStack.push(0)
+        minStack.push(-3)
+        XCTAssertEqual(minStack.getMin(), -3) // return -3
+        minStack.pop()
+        XCTAssertEqual(minStack.top(), 0)     // return 0
+        XCTAssertEqual(minStack.getMin(), -2) // return -2
     }
 }
 
