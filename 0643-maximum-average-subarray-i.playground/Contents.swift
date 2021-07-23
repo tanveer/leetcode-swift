@@ -7,32 +7,35 @@ import Foundation
 // ================
 class Solution {
     func findMaxAverage(_ nums: [Int], _ k: Int) -> Double {
-        guard !nums.isEmpty else { return 0.0 }
-        var sum: Double = 0
-        for i in 0..<k {
-            sum += nums[i].doubleValue
+        var maxAerage: Double = 0
+        var sumOfCurrentWindow = 0
+        var startWindow = 0
+
+        for index in nums.indices {
+            sumOfCurrentWindow += nums[index]
+            if index >= k - 1 {
+                maxAerage = max(maxAerage, sumOfCurrentWindow.double / k.double)
+                sumOfCurrentWindow -= nums[startWindow]
+                startWindow += 1
+            }
         }
 
-        var average = sum / k.doubleValue
-        for i in k..<nums.count {
-            sum += nums[i].doubleValue - nums[i - k].doubleValue
-            average = max(average, sum / k.doubleValue)
-        }
-
-        return average
+        return maxAerage
     }
 }
 
 extension Int {
-    var doubleValue: Double {
+    var double: Double {
         return Double(self)
     }
 }
+
 
 // MARK: - Time and Space Complexity
 // =================================
 // Time Complexity: O(n)
 // Space Complexity: O(1)
+
 
 // MARK: - Tests
 // =============
@@ -47,7 +50,7 @@ class Tests: XCTestCase {
 
     // Additional Examples
     func testAdditionalExamples() {
-        XCTAssertEqual(s.findMaxAverage([], 0), 0.0)
+        XCTAssertEqual(s.findMaxAverage([1, 1, 2], 2), 1.5)
     }
 }
 
